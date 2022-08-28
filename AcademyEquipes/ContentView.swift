@@ -11,10 +11,20 @@ struct ContentView: View {
     @ObservedObject var datas = ReadData()
     
     var body: some View {
-        List {
-            VStack {
-                Text("teste \(datas.equipes)")
-                    .padding()
+        VStack {
+            Text("ciclo1")
+                .foregroundColor(.blue)
+            List(datas.equipes.ciclo1, id: \.self) { ciclo in
+                ForEach(ciclo, id: \.self) { ci in
+                    Text(ci)
+                }
+            }
+            Text("ciclo2")
+                .foregroundColor(.blue)
+            List(datas.equipes.ciclo2, id: \.self) { ciclo in
+                ForEach(ciclo, id: \.self) { ci in
+                    Text(ci)
+                }
             }
         }
     }

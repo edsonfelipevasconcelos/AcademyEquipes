@@ -8,34 +8,36 @@
 import Foundation
 
 struct Equipe: Codable, Identifiable {
+    let id = UUID()
+    var ciclo1: [[String]]
+    var ciclo2: [[String]]
+    
     enum CodingKeys: CodingKey {
         case ciclo1
         case ciclo2
     }
-    
-    var id = UUID()
-    var ciclo1: [[String]]
-    var ciclo2: [[String]]
 }
 
-//It gives an error in the definition of the class I created to decode the json...
-
 class ReadData: ObservableObject {
-    @Published var equipes = Equipe(ciclo1: [[]], ciclo2: [[]]))
-
+    @Published var equipes = Equipe(ciclo1: [[]], ciclo2: [[]])
+    
     init() {
         loadData()
     }
     
     func loadData() {
-        guard let url = Bundle.main.url(forResource: "Contents", withExtension: "json")
-        else {
+        guard let url = Bundle.main.url(forResource: "Contents", withExtension: "json") else {
             print("Json file not found!")
             return
         }
-        
-        let data = try? Data(contentsOf: url)
-        let equipes = try? JSONDecoder().decode(Equipe.self, from: data!)
-        self.equipes = equipes!
+        do {
+            let data = try Data(contentsOf: url)
+            equipes = try JSONDecoder().decode(Equipe.self, from: data)
+        } catch {
+            print(error)
+        }
     }
+   
 }
+
+
