@@ -37,7 +37,14 @@ class ReadData: ObservableObject {
             print(error)
         }
     }
-   
 }
+
+//func verificarEquipes(ciclo1: [[String]], ciclo2: [[String]]) {
+//    for i in ciclo1 {
+//        for j in ciclo2 {
+//            if i.contains(<#T##element: String##String#>)
+//        }
+//    }
+//}
 
 

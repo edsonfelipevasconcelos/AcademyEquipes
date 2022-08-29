@@ -10,21 +10,37 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var datas = ReadData()
     
+    var ciclo3 = [[String]]()
+    
     var body: some View {
         VStack {
-            Text("ciclo1")
+            Text("Ciclo1")
                 .foregroundColor(.blue)
-            List(datas.equipes.ciclo1, id: \.self) { ciclo in
+            List(Array(datas.equipes.ciclo1.enumerated()), id: \.offset) { index, ciclo in
+                    ForEach(ciclo, id: \.self) { ci in
+                        HStack {
+                            Text("Equipe: \(index + 1)")
+                            Spacer()
+                            Text("Aluno: \(ci)")
+                        }
+                    }
+            }
+            
+            Text("Ciclo2")
+                .foregroundColor(.blue)
+            List(Array(datas.equipes.ciclo2.enumerated()), id: \.offset) { index, ciclo in
                 ForEach(ciclo, id: \.self) { ci in
-                    Text(ci)
+                    HStack {
+                        Text("Equipe: \(index + 1)")
+                        Spacer()
+                        Text("Aluno: \(ci)")
+                    }
                 }
             }
-            Text("ciclo2")
+            Text("Ciclo3")
                 .foregroundColor(.blue)
-            List(datas.equipes.ciclo2, id: \.self) { ciclo in
-                ForEach(ciclo, id: \.self) { ci in
-                    Text(ci)
-                }
+            List {
+                
             }
         }
     }
